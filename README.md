@@ -29,5 +29,5 @@ Sistema de Registro de Productos desarrollado como parte de una evaluación téc
 3. Ejecuta el servidor embebido de PHP desde la carpeta raíz del proyecto:
 
    ```bash
-   php -S localhost:8000 -t public
+   php -S localhost:8000
    ```
