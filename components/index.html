@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Registro de Producto</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <h1>Registro de Producto</h1>
+    <form id="formularioProducto">
+      <label>Código del Producto:</label>
+      <input type="text" name="codigo" id="codigo" /><br />
+
+      <label>Nombre del Producto:</label>
+      <input type="text" name="nombre" id="nombre" /><br />
+
+      <label>Bodega:</label>
+      <select id="bodega">
+        <option value="">Seleccione una bodega</option></select
+      ><br />
+
+      <label>Sucursal:</label>
+      <select id="sucursal">
+        <option value="">Seleccione una sucursal</option></select
+      ><br />
+
+      <label>Moneda:</label>
+      <select id="moneda">
+        <option value="">Seleccione una moneda</option></select
+      ><br />
+
+      <label>Precio:</label>
+      <input type="text" name="precio" id="precio" /><br />
+
+      <label>Material del Producto:</label><br />
+      <input type="checkbox" name="material" value="Metal" /> Metal
+      <input type="checkbox" name="material" value="Plástico" /> Plástico
+      <input type="checkbox" name="material" value="Madera" /> Madera
+      <input type="checkbox" name="material" value="Vidrio" /> Vidrio<br />
+
+      <label>Descripción:</label><br />
+      <textarea id="descripcion"></textarea><br />
+
+      <button type="submit" id="guardar">Guardar Producto</button>
+    </form>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
