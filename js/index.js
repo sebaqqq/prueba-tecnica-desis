@@ -8,11 +8,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!validarFormulario()) return;
 
+      const codigo = document.getElementById("codigo").value.trim();
+      const yaExiste = await verificarCodigo(codigo);
+
+      if (yaExiste) {
+        alert("El código del producto ya está registrado.");
+        return;
+      }
+
       const materialesSeleccionados = Array.from(
         document.querySelectorAll('input[name="material"]:checked')
       ).map((cb) => cb.value);
+
       const data = {
-        codigo: document.getElementById("codigo").value,
+        codigo,
         nombre: document.getElementById("nombre").value,
         bodega: document.getElementById("bodega").value,
         sucursal: document.getElementById("sucursal").value,
@@ -31,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const result = await response.json();
       if (result.status === "success") {
         alert("Producto guardado con éxito.");
+        document.getElementById("formularioProducto").reset();
       } else {
         alert("Error: " + result.message);
       }
@@ -98,6 +108,12 @@ function validarFormulario() {
   return true;
 }
 
+function actualizarContador() {
+  const descripcion = document.getElementById("descripcion");
+  const contador = document.getElementById("contador");
+  contador.textContent = `${descripcion.value.length} / 1000`;
+}
+
 function cargarSelects() {
   fetch("../php/obtener_bodegas.php")
     .then((res) => res.json())
@@ -111,22 +127,6 @@ function cargarSelects() {
       });
     });
 
-  document.getElementById("bodega").addEventListener("change", function () {
-    const idBodega = this.value;
-    fetch(`../php/obtener_sucursales.php?id=${idBodega}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const select = document.getElementById("sucursal");
-        select.innerHTML = '<option value="">Seleccione una sucursal</option>';
-        data.forEach((sucursal) => {
-          const option = document.createElement("option");
-          option.value = sucursal.id;
-          option.textContent = sucursal.nombre;
-          select.appendChild(option);
-        });
-      });
-  });
-
   fetch("../php/obtener_monedas.php")
     .then((res) => res.json())
     .then((data) => {
@@ -138,4 +138,36 @@ function cargarSelects() {
         select.appendChild(option);
       });
     });
+
+  document.getElementById("bodega").addEventListener("change", function () {
+    const idBodega = this.value;
+    const select = document.getElementById("sucursal");
+    select.innerHTML = '<option value="">Seleccione una sucursal</option>';
+
+    if (!idBodega) return;
+
+    fetch(`../php/obtener_sucursales.php?id=${idBodega}`)
+      .then((res) => res.json())
+      .then((data) => {
+        data.forEach((sucursal) => {
+          const option = document.createElement("option");
+          option.value = sucursal.id;
+          option.textContent = sucursal.nombre;
+          select.appendChild(option);
+        });
+      });
+  });
+}
+
+async function verificarCodigo(codigo) {
+  try {
+    const res = await fetch(
+      `../php/verificar_codigo.php?codigo=${encodeURIComponent(codigo)}`
+    );
+    const data = await res.json();
+    return data.existe;
+  } catch (error) {
+    console.error("Error verificando código:", error);
+    return false;
+  }
 }

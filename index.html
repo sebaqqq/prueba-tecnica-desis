@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Registro de Producto</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-card">
+        <h1>Registro de Producto</h1>
+        <form id="formularioProducto">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="codigo">Código</label>
+              <input
+                type="text"
+                id="codigo"
+                name="codigo"
+                placeholder="Ej: PROD01K"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                placeholder="Ej: Comedor"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="bodega">Bodega</label>
+              <select id="bodega" name="bodega">
+                <option value="">Seleccione una bodega</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="sucursal">Sucursal</label>
+              <select id="sucursal" name="sucursal">
+                <option value="">Seleccione una sucursal</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="moneda">Moneda</label>
+              <select id="moneda" name="moneda">
+                <option value="">Seleccione una moneda</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="precio">Precio</label>
+              <input
+                type="text"
+                id="precio"
+                name="precio"
+                placeholder="Precio"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Material del Producto</label>
+            <div class="checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" name="material" value="plastico" />
+                Plástico
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="material" value="metal" /> Metal
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="material" value="madera" />
+                Madera
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="material" value="vidrio" />
+                Vidrio
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="material" value="textil" /> Textil
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea
+              id="descripcion"
+              maxlength="1000"
+              name="descripcion"
+              rows="4"
+              oninput="actualizarContador()"
+            ></textarea>
+            <small id="contador">0 / 1000</small>
+          </div>
+
+          <div class="button-container">
+            <button type="submit" id="guardar">Guardar Producto</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="./js/index.js"></script>
+  </body>
+</html>
