@@ -146,7 +146,7 @@ function cargarSelects() {
   document.getElementById("bodega").addEventListener("change", function () {
     const idBodega = this.value;
     const select = document.getElementById("sucursal");
-    select.innerHTML = '<option value="">Seleccione una sucursal</option>';
+    select.innerHTML = '<option value=""></option>';
 
     if (!idBodega) return;
 
