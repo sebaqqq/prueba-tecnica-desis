@@ -47,6 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+document.getElementById("precio").addEventListener("input", function () {
+  this.value = this.value.replace(",", ".");
+});
+
 function validarFormulario() {
   const codigo = document.getElementById("codigo").value.trim();
   const nombre = document.getElementById("nombre").value.trim();
